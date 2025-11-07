@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intercambio de Regalos Familiar</title>
+
+  <!-- ESTILOS ELEGANTES -->
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      background: linear-gradient(135deg, #1f2933, #111827);
+      color: #222;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 24px 28px 28px;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 26px;
+      letter-spacing: 0.03em;
+    }
+
+    h2, h3 {
+      margin-top: 0;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .layout {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .main-panel {
+      flex: 2;
+      min-width: 320px;
+    }
+
+    .side-panel {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #f8fafc 0, #ffffff 40%, #f9fafb 100%);
+      border-radius: 14px;
+      padding: 16px 18px 18px;
+      margin-bottom: 16px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+      color: #374151;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 9px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+      margin-bottom: 6px;
+      background: #f9fafb;
+      transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    input[type="text"]:focus,
+    select:focus {
+      border-color: #6366f1;
+      outline: none;
+      background: #ffffff;
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3);
+    }
+
+    button {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: #fff;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s, opacity 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    button:hover {
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.45);
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+      opacity: 0.8;
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+      color: #111827;
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 3px 8px rgba(148, 163, 184, 0.5);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, #059669, #10b981);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, 0.08);
+      color: #4c51bf;
+      font-size: 11px;
+      margin: 2px 4px 2px 0;
+      border: 1px solid rgba(129, 140, 248, 0.5);
+    }
+
+    ul.simple-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 4px 0 0;
+      font-size: 14px;
+    }
+
+    ul.simple-list li {
+      padding: 4px 0;
+      border-bottom: 1px dashed #e5e7eb;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .result-message {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #ecfdf3;
+      color: #166534;
+      font-size: 13px;
+      border: 1px solid #bbf7d0;
+    }
+
+    .result-warning {
+      background: #fffbeb;
+      color: #92400e;
+      border-color: #fed7aa;
+    }
+
+    .side-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+
+    .small-note {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 8px;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 7px 9px;
+      text-align: left;
+    }
+
+    th {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: #f9fafb;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: #ffffff;
+    }
+
+    tbody tr:hover {
+      background: #eef2ff;
+    }
+
+    .actions-row {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Intercambio de Regalos Familiar</h1>
+  <p class="subtitle">
+    Registra a la familia, prepara el sorteo y deja que cada uno descubra a su amigo secreto.  
+    Nadie se puede tocar a sí mismo ni repetir amigo.
+  </p>
+
+  <div class="layout">
+    <!-- Panel principal -->
+    <section class="main-panel">
+      <!-- 1. Registro de participantes -->
+      <div class="card">
+        <h2>1. Participantes</h2>
+        <label for="nombreInput">Nombre del participante</label>
+        <div style="display:flex; gap:8px; align-items:flex-end;">
+          <div style="flex:1;">
+            <input type="text" id="nombreInput" placeholder="Ej: Mamá, Papá, Esteban..." />
+          </div>
+          <button id="agregarBtn">Agregar</button>
+        </div>
+        <div class="small-note">
+          *No se permiten nombres repetidos. Deben haber al menos 2 participantes para iniciar el sorteo.
+        </div>
+
+        <h3 style="margin-top:14px;">Lista de participantes</h3>
+        <div id="listaParticipantesVacia" style="font-size:13px;color:#6b7280;">
+          Aún no hay participantes.
+        </div>
+        <ul id="listaParticipantes" class="simple-list"></ul>
+
+        <div class="actions-row">
+          <button id="iniciarSorteoBtn" disabled>2. Preparar sorteo</button>
+          <button id="reiniciarBtn" class="btn-secondary">Reiniciar todo</button>
+        </div>
+      </div>
+
+      <!-- 2. Sorteo individual -->
+      <div class="card" id="panelSorteo" style="display:none;">
+        <h2>3. Sorteo de amigo secreto</h2>
+        <div class="small-note">
+          Cada persona selecciona su nombre y hace clic en <strong>“Sortear”</strong> para ver a quién le toca.
+        </div>
+        <label for="selectParticipante">Selecciona tu nombre</label>
+        <select id="selectParticipante">
+          <!-- Se llenará dinámicamente -->
+        </select>
+
+        <div class="actions-row">
+          <button id="sortearBtn">Sortear amigo secreto</button>
+          <button id="confirmarBtn" disabled class="btn-accent">Confirmar</button>
+          <button id="cancelarBtn" class="btn-secondary" disabled>Cancelar</button>
+        </div>
+
+        <div id="mensajeResultado" class="result-message hidden"></div>
+
+        <div style="margin-top:14px;">
+          <h3>Estado actual</h3>
+          <div style="font-size:13px;">
+            <strong>Participantes pendientes:</strong>
+            <span id="estadoPendientes"></span>
+          </div>
+          <div style="font-size:13px; margin-top:4px;">
+            <strong>Amigos secretos disponibles:</strong>
+            <span id="estadoAmigosDisponibles"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel lateral de resultados -->
+    <section class="side-panel">
+      <div class="card">
+        <div class="side-panel-header">
+          <h2 style="font-size:18px; margin:0;">Resultados</h2>
+          <button id="toggleResultadosBtn" class="btn-secondary" style="font-size:11px; padding:5px 10px;">
+            Mostrar / Ocultar
+          </button>
+        </div>
+        <div class="badge">Panel oculto al inicio</div>
+
+        <div id="panelResultados" class="hidden" style="margin-top:12px;">
+          <div class="actions-row" style="margin-bottom:6px;">
+            <button id="descargarPdfBtn" class="btn-accent" style="font-size:12px;">
+              Descargar PDF
+            </button>
+          </div>
+
+          <h3 style="margin-bottom:4px;">Parejas de amigo secreto</h3>
+          <table>
+            <thead>
+            <tr>
+              <th>Participante</th>
+              <th>Amigo secreto</th>
+            </tr>
+            </thead>
+            <tbody id="tablaResultadosBody">
+            <!-- Filas dinámicas -->
+            </tbody>
+          </table>
+          <div id="sinResultados" style="font-size:13px;color:#6b7280; margin-top:6px;">
+            Aún no se ha confirmado ninguna pareja.
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- LIBRERÍAS PARA PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.min.js"></script>
+
+<script>
+  const nombreInput = document.getElementById('nombreInput');
+  const agregarBtn = document.getElementById('agregarBtn');
+  const iniciarSorteoBtn = document.getElementById('iniciarSorteoBtn');
+  const reiniciarBtn = document.getElementById('reiniciarBtn');
+
+  const listaParticipantesEl = document.getElementById('listaParticipantes');
+  const listaParticipantesVaciaEl = document.getElementById('listaParticipantesVacia');
+
+  const panelSorteo = document.getElementById('panelSorteo');
+  const selectParticipante = document.getElementById('selectParticipante');
+  const sortearBtn = document.getElementById('sortearBtn');
+  const confirmarBtn = document.getElementById('confirmarBtn');
+  const cancelarBtn = document.getElementById('cancelarBtn');
+  const mensajeResultado = document.getElementById('mensajeResultado');
+
+  const estadoPendientes = document.getElementById('estadoPendientes');
+  const estadoAmigosDisponibles = document.getElementById('estadoAmigosDisponibles');
+
+  const toggleResultadosBtn = document.getElementById('toggleResultadosBtn');
+  const panelResultados = document.getElementById('panelResultados');
+  const tablaResultadosBody = document.getElementById('tablaResultadosBody');
+  const sinResultados = document.getElementById('sinResultados');
+
+  const descargarPdfBtn = document.getElementById('descargarPdfBtn');
+
+  let participantes = [];
+  let asignaciones = {};      // nombre -> amigo secreto (derangement)
+  let pendientes = [];        // nombres que aún no han hecho su sorteo
+  let receptoresAsignados = new Set(); // quiénes ya fueron elegidos
+  let parejasConfirmadas = [];        // [{giver, receiver}, ...]
+
+  let sorteoPreparado = false;
+  let sorteoEnCurso = false;
+  let candidatoActual = null; // {giver, receiver}
+
+  function mezclar(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  // Genera una asignación sin que nadie se toque a sí mismo (derangement simple)
+  function generarDerangement(nombres) {
+    const n = nombres.length;
+    if (n < 2) {
+      throw new Error("Se necesitan al menos 2 participantes");
+    }
+
+    const indices = Array.from({ length: n }, (_, i) => i);
+    let intentos = 0;
+    let esDerangement = false;
+
+    while (!esDerangement && intentos < 10000) {
+      mezclar(indices);
+      esDerangement = true;
+      for (let i = 0; i < n; i++) {
+        if (indices[i] === i) {
+          esDerangement = false;
+          break;
+        }
+      }
+      intentos++;
+    }
+
+    if (!esDerangement) {
+      throw new Error("No se pudo generar el sorteo. Intenta de nuevo.");
+    }
+
+    const mapa = {};
+    for (let i = 0; i < n; i++) {
+      mapa[nombres[i]] = nombres[indices[i]];
+    }
+    return mapa;
+  }
+
+  function actualizarListaParticipantes() {
+    listaParticipantesEl.innerHTML = '';
+    if (participantes.length === 0) {
+      listaParticipantesVaciaEl.style.display = 'block';
+    } else {
+      listaParticipantesVaciaEl.style.display = 'none';
+      participantes.forEach(nombre => {
+        const li = document.createElement('li');
+        li.textContent = nombre;
+        listaParticipantesEl.appendChild(li);
+      });
+    }
+    iniciarSorteoBtn.disabled = participantes.length < 2;
+  }
+
+  function actualizarSelectPendientes() {
+    selectParticipante.innerHTML = '';
+    pendientes.forEach(nombre => {
+      const opt = document.createElement('option');
+      opt.value = nombre;
+      opt.textContent = nombre;
+      selectParticipante.appendChild(opt);
+    });
+
+    if (pendientes.length === 0) {
+      const opt = document.createElement('option');
+      opt.value = '';
+      opt.textContent = 'No hay participantes pendientes';
+      selectParticipante.appendChild(opt);
+      selectParticipante.disabled = true;
+      sortearBtn.disabled = true;
+    } else {
+      selectParticipante.disabled = false;
+      sortearBtn.disabled = false;
+    }
+  }
+
+  function actualizarEstadoTexto() {
+    if (pendientes.length === 0) {
+      estadoPendientes.innerHTML = '<span class="pill">Ninguno</span>';
+    } else {
+      estadoPendientes.innerHTML = pendientes
+        .map(nombre => `<span class="pill">${nombre}</span>`)
+        .join('');
+    }
+
+    const amigosDisponibles = participantes.filter(n => !receptoresAsignados.has(n));
+    if (amigosDisponibles.length === 0) {
+      estadoAmigosDisponibles.innerHTML = '<span class="pill">Ninguno</span>';
+    } else {
+      estadoAmigosDisponibles.innerHTML = amigosDisponibles
+        .map(nombre => `<span class="pill">${nombre}</span>`)
+        .join('');
+    }
+  }
+
+  function actualizarTablaResultados() {
+    tablaResultadosBody.innerHTML = '';
+    if (parejasConfirmadas.length === 0) {
+      sinResultados.style.display = 'block';
+      return;
+    }
+    sinResultados.style.display = 'none';
+
+    parejasConfirmadas.forEach(par => {
+      const tr = document.createElement('tr');
+      const td1 = document.createElement('td');
+      const td2 = document.createElement('td');
+      td1.textContent = par.giver;
+      td2.textContent = par.receiver;
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tablaResultadosBody.appendChild(tr);
+    });
+  }
+
+  function limpiarResultadoActual() {
+    candidatoActual = null;
+    mensajeResultado.classList.add('hidden');
+    mensajeResultado.textContent = '';
+    confirmarBtn.disabled = true;
+    cancelarBtn.disabled = true;
+  }
+
+  // --- Eventos UI ---
+
+  agregarBtn.addEventListener('click', () => {
+    const nombre = nombreInput.value.trim();
+    if (!nombre) return;
+
+    const yaExiste = participantes.some(
+      n => n.toLowerCase() === nombre.toLowerCase()
+    );
+    if (yaExiste) {
+      alert('Ese nombre ya está en la lista.');
+      return;
+    }
+
+    if (sorteoPreparado) {
+      alert('Ya se preparó el sorteo. Reinicia si quieres cambiar la lista.');
+      return;
+    }
+
+    participantes.push(nombre);
+    nombreInput.value = '';
+    actualizarListaParticipantes();
+  });
+
+  nombreInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      agregarBtn.click();
+    }
+  });
+
+  iniciarSorteoBtn.addEventListener('click', () => {
+    try {
+      asignaciones = generarDerangement(participantes);
+    } catch (err) {
+      alert(err.message);
+      return;
+    }
+
+    pendientes = [...participantes];
+    receptoresAsignados.clear();
+    parejasConfirmadas = [];
+    sorteoPreparado = true;
+
+    panelSorteo.style.display = 'block';
+    limpiarResultadoActual();
+    actualizarSelectPendientes();
+    actualizarEstadoTexto();
+    actualizarTablaResultados();
+
+    alert('Sorteo preparado.\nAhora cada participante puede ingresar su nombre y descubrir a su amigo secreto.');
+  });
+
+  sortearBtn.addEventListener('click', () => {
+    if (!sorteoPreparado) {
+      alert('Primero prepara el sorteo.');
+      return;
+    }
+    if (pendientes.length === 0) {
+      alert('Ya no quedan participantes pendientes.');
+      return;
+    }
+
+    const nombreSeleccionado = selectParticipante.value;
+    if (!pendientes.includes(nombreSeleccionado)) {
+      alert('Ese participante ya realizó su sorteo.');
+      return;
+    }
+
+    const amigo = asignaciones[nombreSeleccionado];
+    if (!amigo) {
+      alert('Error al obtener el amigo secreto. Reinicia el sorteo.');
+      return;
+    }
+
+    sorteoEnCurso = true;
+    candidatoActual = { giver: nombreSeleccionado, receiver: amigo };
+
+    mensajeResultado.classList.remove('hidden');
+    mensajeResultado.classList.remove('result-warning');
+    mensajeResultado.innerHTML = `
+      <strong>${nombreSeleccionado}</strong>, tu amigo secreto es:
+      <strong>${amigo}</strong> 🎁<br>
+      Si estás de acuerdo, haz clic en <strong>Confirmar</strong>.
+    `;
+
+    confirmarBtn.disabled = false;
+    cancelarBtn.disabled = false;
+  });
+
+  confirmarBtn.addEventListener('click', () => {
+    if (!candidatoActual) return;
+
+    const { giver, receiver } = candidatoActual;
+
+    pendientes = pendientes.filter(n => n !== giver);
+    receptoresAsignados.add(receiver);
+    parejasConfirmadas.push({ giver, receiver });
+
+    limpiarResultadoActual();
+    actualizarSelectPendientes();
+    actualizarEstadoTexto();
+    actualizarTablaResultados();
+
+    sorteoEnCurso = false;
+
+    if (pendientes.length === 0) {
+      mensajeResultado.classList.remove('hidden');
+      mensajeResultado.classList.add('result-warning');
+      mensajeResultado.textContent = 'El sorteo ha finalizado. Todos tienen su amigo secreto.';
+    }
+  });
+
+  cancelarBtn.addEventListener('click', () => {
+    limpiarResultadoActual();
+    sorteoEnCurso = false;
+  });
+
+  reiniciarBtn.addEventListener('click', () => {
+    if (!confirm('¿Seguro que quieres reiniciar todo el sorteo?')) return;
+
+    participantes = [];
+    asignaciones = {};
+    pendientes = [];
+    receptoresAsignados.clear();
+    parejasConfirmadas = [];
+    sorteoPreparado = false;
+    sorteoEnCurso = false;
+    candidatoActual = null;
+
+    panelSorteo.style.display = 'none';
+    selectParticipante.innerHTML = '';
+    mensajeResultado.classList.add('hidden');
+    mensajeResultado.textContent = '';
+
+    actualizarListaParticipantes();
+    actualizarTablaResultados();
+    actualizarEstadoTexto();
+  });
+
+  toggleResultadosBtn.addEventListener('click', () => {
+    panelResultados.classList.toggle('hidden');
+  });
+
+  // --- DESCARGAR PDF ---
+  descargarPdfBtn.addEventListener('click', () => {
+    if (parejasConfirmadas.length === 0) {
+      alert('No hay parejas confirmadas para exportar.');
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(18);
+    doc.text('Intercambio de Regalos Familiar', 14, 18);
+    doc.setFontSize(12);
+    doc.text('Parejas de amigo secreto', 14, 26);
+
+    const rows = parejasConfirmadas.map(par => [par.giver, par.receiver]);
+
+    doc.autoTable({
+      head: [['Participante', 'Amigo secreto']],
+      body: rows,
+      startY: 32,
+      styles: { fontSize: 11 }
+    });
+
+    doc.save('amigo-secreto.pdf');
+  });
+
+  // Inicial
+  actualizarListaParticipantes();
+  actualizarEstadoTexto();
+  actualizarTablaResultados();
+</script>
+</body>
+</html>
