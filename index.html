@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Intercambio de Regalos Familiar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amigo Secreto Familiar - Navidad</title>
 
-  <!-- ESTILOS ELEGANTES -->
   <style>
     * {
       box-sizing: border-box;
@@ -13,61 +13,91 @@
 
     body {
       margin: 0;
-      padding: 24px;
-      background: linear-gradient(135deg, #1f2933, #111827);
-      color: #222;
+      padding: 16px;
+      background: radial-gradient(circle at top, #f97373 0, #b91c1c 30%, #065f46 100%);
+      color: #111827;
     }
 
     .container {
-      max-width: 1200px;
+      width: 100%;
+      max-width: 960px;
       margin: 0 auto;
-      background: #ffffff;
-      padding: 24px 28px 28px;
-      border-radius: 18px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.96);
+      padding: 18px 16px 20px;
+      border-radius: 20px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
     }
 
-    h1 {
-      margin: 0 0 4px;
-      font-size: 26px;
-      letter-spacing: 0.03em;
+    .header {
+      text-align: center;
+      margin-bottom: 10px;
     }
 
-    h2, h3 {
-      margin-top: 0;
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .header h1 span {
+      font-size: 22px;
     }
 
     .subtitle {
-      font-size: 14px;
+      font-size: 13px;
       color: #6b7280;
-      margin-bottom: 4px;
+      margin-top: 6px;
     }
 
     .layout {
       display: flex;
-      gap: 24px;
-      margin-top: 16px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .layout {
+        flex-direction: row;
+        align-items: flex-start;
+      }
     }
 
     .main-panel {
       flex: 2;
-      min-width: 320px;
+      min-width: 0;
     }
 
     .side-panel {
       flex: 1;
-      min-width: 260px;
+      min-width: 0;
     }
 
     .card {
-      background: radial-gradient(circle at top left, #f8fafc 0, #ffffff 40%, #f9fafb 100%);
-      border-radius: 14px;
-      padding: 16px 18px 18px;
-      margin-bottom: 16px;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+      background: radial-gradient(circle at top left, #fef2f2 0, #ffffff 35%, #f0fdf4 100%);
+      border-radius: 16px;
+      padding: 12px 12px 14px;
+      margin-bottom: 12px;
+      border: 1px solid #fecaca;
+      box-shadow: 0 12px 30px rgba(185, 28, 28, 0.18);
+    }
+
+    .card h2 {
+      margin: 0 0 4px;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card h2 span.icon {
+      font-size: 18px;
     }
 
     label {
@@ -80,40 +110,42 @@
 
     input[type="text"], select {
       width: 100%;
-      padding: 8px 10px;
-      border-radius: 9px;
-      border: 1px solid #d1d5db;
+      padding: 9px 10px;
+      border-radius: 12px;
+      border: 1px solid #fecaca;
       font-size: 14px;
       margin-bottom: 6px;
-      background: #f9fafb;
+      background: #fff7ed;
       transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
 
     input[type="text"]:focus,
     select:focus {
-      border-color: #6366f1;
+      border-color: #16a34a;
       outline: none;
       background: #ffffff;
-      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.4);
     }
 
     button {
-      padding: 8px 14px;
+      padding: 9px 14px;
       border-radius: 999px;
       border: none;
       cursor: pointer;
       font-size: 13px;
       font-weight: 600;
-      background: linear-gradient(135deg, #4f46e5, #6366f1);
-      color: #fff;
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      color: #f9fafb;
       transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s, opacity 0.2s;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
+      min-width: 90px;
     }
 
     button:hover {
-      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.45);
+      box-shadow: 0 4px 10px rgba(21, 128, 61, 0.4);
       transform: translateY(-1px);
     }
 
@@ -122,7 +154,7 @@
       cursor: not-allowed;
       box-shadow: none;
       transform: none;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     .btn-secondary {
@@ -132,23 +164,27 @@
     }
 
     .btn-secondary:hover {
-      box-shadow: 0 3px 8px rgba(148, 163, 184, 0.5);
+      box-shadow: 0 3px 8px rgba(148, 163, 184, 0.6);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
     }
 
     .btn-accent {
-      background: linear-gradient(135deg, #059669, #10b981);
+      background: linear-gradient(135deg, #16a34a, #65a30d);
     }
 
-    .pill {
+    .chip {
       display: inline-flex;
       align-items: center;
-      padding: 3px 10px;
+      padding: 3px 9px;
       border-radius: 999px;
-      background: rgba(99, 102, 241, 0.08);
-      color: #4c51bf;
+      background: rgba(239, 68, 68, 0.08);
+      color: #b91c1c;
       font-size: 11px;
       margin: 2px 4px 2px 0;
-      border: 1px solid rgba(129, 140, 248, 0.5);
+      border: 1px dashed rgba(248, 113, 113, 0.7);
     }
 
     ul.simple-list {
@@ -156,11 +192,21 @@
       padding-left: 0;
       margin: 4px 0 0;
       font-size: 14px;
+      max-height: 180px;
+      overflow-y: auto;
     }
 
     ul.simple-list li {
-      padding: 4px 0;
-      border-bottom: 1px dashed #e5e7eb;
+      padding: 4px 2px;
+      border-bottom: 1px dashed #fecaca;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    ul.simple-list li::before {
+      content: "🎄";
+      font-size: 13px;
     }
 
     .hidden {
@@ -168,9 +214,9 @@
     }
 
     .result-message {
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 10px;
+      margin-top: 8px;
+      padding: 9px 10px;
+      border-radius: 12px;
       background: #ecfdf3;
       color: #166534;
       font-size: 13px;
@@ -178,9 +224,22 @@
     }
 
     .result-warning {
-      background: #fffbeb;
+      background: #fef3c7;
       color: #92400e;
       border-color: #fed7aa;
+    }
+
+    .small-note {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 3px;
+    }
+
+    .actions-row {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .side-panel-header {
@@ -188,137 +247,147 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .badge {
-      display: inline-block;
-      padding: 2px 8px;
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
       border-radius: 999px;
-      font-size: 11px;
-      background: #f3f4f6;
-      color: #6b7280;
+      font-size: 10px;
+      background: #fee2e2;
+      color: #b91c1c;
+      gap: 4px;
     }
 
-    .small-note {
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 4px;
+    .badge span {
+      font-size: 11px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 13px;
-      margin-top: 8px;
+      margin-top: 6px;
       overflow: hidden;
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
     th, td {
-      border: 1px solid #e5e7eb;
+      border: 1px solid #fecaca;
       padding: 7px 9px;
       text-align: left;
     }
 
     th {
-      background: linear-gradient(135deg, #4f46e5, #6366f1);
-      color: #f9fafb;
+      background: linear-gradient(135deg, #b91c1c, #16a34a);
+      color: #fefce8;
       font-weight: 600;
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
     }
 
     tbody tr:nth-child(even) {
-      background: #f9fafb;
+      background: #fef2f2;
     }
 
     tbody tr:nth-child(odd) {
-      background: #ffffff;
+      background: #f0fdf4;
     }
 
     tbody tr:hover {
-      background: #eef2ff;
+      background: #fffbeb;
     }
 
-    .actions-row {
+    #panelResultados {
       margin-top: 10px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
     }
 
-    @media (max-width: 900px) {
-      .layout {
-        flex-direction: column;
-      }
+    #sinResultados {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .estado-label {
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .estado-label strong {
+      color: #374151;
     }
   </style>
 </head>
 <body>
 <div class="container">
-  <h1>Intercambio de Regalos Familiar</h1>
-  <p class="subtitle">
-    Registra a la familia, prepara el sorteo y deja que cada uno descubra a su amigo secreto.  
-    Nadie se puede tocar a sí mismo ni repetir amigo.
-  </p>
+  <div class="header">
+    <h1>
+      <span>🎅</span> Amigo Secreto Familiar <span>🎄</span>
+    </h1>
+    <p class="subtitle">
+      Registra a la familia, prepara el sorteo y deja que cada uno descubra a su amigo secreto navideño.
+    </p>
+  </div>
 
   <div class="layout">
     <!-- Panel principal -->
     <section class="main-panel">
-      <!-- 1. Registro de participantes -->
+      <!-- 1. Participantes -->
       <div class="card">
-        <h2>1. Participantes</h2>
+        <h2><span class="icon">📝</span> 1. Participantes</h2>
         <label for="nombreInput">Nombre del participante</label>
-        <div style="display:flex; gap:8px; align-items:flex-end;">
+        <div style="display:flex; gap:6px; align-items:flex-end;">
           <div style="flex:1;">
             <input type="text" id="nombreInput" placeholder="Ej: Mamá, Papá, Esteban..." />
           </div>
           <button id="agregarBtn">Agregar</button>
         </div>
         <div class="small-note">
-          *No se permiten nombres repetidos. Deben haber al menos 2 participantes para iniciar el sorteo.
+          No se permiten nombres repetidos. Deben haber al menos 2 participantes para iniciar el sorteo.
         </div>
 
-        <h3 style="margin-top:14px;">Lista de participantes</h3>
-        <div id="listaParticipantesVacia" style="font-size:13px;color:#6b7280;">
-          Aún no hay participantes.
+        <h3 style="margin-top:10px; font-size:15px;">Lista de participantes</h3>
+        <div id="listaParticipantesVacia" style="font-size:12px;color:#6b7280;">
+          Aún no hay participantes. Empieza agregando uno 🎁
         </div>
         <ul id="listaParticipantes" class="simple-list"></ul>
 
         <div class="actions-row">
           <button id="iniciarSorteoBtn" disabled>2. Preparar sorteo</button>
-          <button id="reiniciarBtn" class="btn-secondary">Reiniciar todo</button>
+          <button id="reiniciarBtn" class="btn-secondary btn-danger">Reiniciar todo</button>
         </div>
       </div>
 
       <!-- 2. Sorteo individual -->
       <div class="card" id="panelSorteo" style="display:none;">
-        <h2>3. Sorteo de amigo secreto</h2>
+        <h2><span class="icon">🎁</span> 3. Sorteo de amigo secreto</h2>
         <div class="small-note">
-          Cada persona selecciona su nombre y hace clic en <strong>“Sortear”</strong> para ver a quién le toca.
+          Cada persona selecciona su nombre y toca <strong>“Sortear”</strong> para ver a quién le toca.
         </div>
+
         <label for="selectParticipante">Selecciona tu nombre</label>
         <select id="selectParticipante">
-          <!-- Se llenará dinámicamente -->
+          <!-- dinámico -->
         </select>
 
         <div class="actions-row">
-          <button id="sortearBtn">Sortear amigo secreto</button>
+          <button id="sortearBtn">Sortear</button>
           <button id="confirmarBtn" disabled class="btn-accent">Confirmar</button>
-          <button id="cancelarBtn" class="btn-secondary" disabled>Cancelar</button>
+          <button id="cancelarBtn" disabled class="btn-secondary">Cancelar</button>
         </div>
 
         <div id="mensajeResultado" class="result-message hidden"></div>
 
-        <div style="margin-top:14px;">
-          <h3>Estado actual</h3>
-          <div style="font-size:13px;">
+        <div style="margin-top:10px;">
+          <h3 style="font-size:14px;">Estado actual</h3>
+          <div class="estado-label">
             <strong>Participantes pendientes:</strong>
             <span id="estadoPendientes"></span>
           </div>
-          <div style="font-size:13px; margin-top:4px;">
+          <div class="estado-label">
             <strong>Amigos secretos disponibles:</strong>
             <span id="estadoAmigosDisponibles"></span>
           </div>
@@ -326,25 +395,29 @@
       </div>
     </section>
 
-    <!-- Panel lateral de resultados -->
+    <!-- Panel lateral -->
     <section class="side-panel">
       <div class="card">
         <div class="side-panel-header">
-          <h2 style="font-size:18px; margin:0;">Resultados</h2>
+          <h2 style="font-size:16px; margin:0; display:flex; align-items:center; gap:4px;">
+            <span>🔐</span> Resultados
+          </h2>
           <button id="toggleResultadosBtn" class="btn-secondary" style="font-size:11px; padding:5px 10px;">
             Mostrar / Ocultar
           </button>
         </div>
-        <div class="badge">Panel oculto al inicio</div>
+        <div class="badge">
+          <span>🎄 Panel oculto al inicio</span>
+        </div>
 
-        <div id="panelResultados" class="hidden" style="margin-top:12px;">
-          <div class="actions-row" style="margin-bottom:6px;">
+        <div id="panelResultados" class="hidden">
+          <div class="actions-row" style="margin-top:8px;">
             <button id="descargarPdfBtn" class="btn-accent" style="font-size:12px;">
-              Descargar PDF
+              📄 Descargar PDF
             </button>
           </div>
 
-          <h3 style="margin-bottom:4px;">Parejas de amigo secreto</h3>
+          <h3 style="margin:6px 0 2px; font-size:14px;">Parejas de amigo secreto</h3>
           <table>
             <thead>
             <tr>
@@ -353,11 +426,11 @@
             </tr>
             </thead>
             <tbody id="tablaResultadosBody">
-            <!-- Filas dinámicas -->
+            <!-- filas dinámicas -->
             </tbody>
           </table>
-          <div id="sinResultados" style="font-size:13px;color:#6b7280; margin-top:6px;">
-            Aún no se ha confirmado ninguna pareja.
+          <div id="sinResultados">
+            Aún no se ha confirmado ninguna pareja. Cuando confirmen, aparecerán aquí 🎅
           </div>
         </div>
       </div>
@@ -396,14 +469,14 @@
   const descargarPdfBtn = document.getElementById('descargarPdfBtn');
 
   let participantes = [];
-  let asignaciones = {};      // nombre -> amigo secreto (derangement)
-  let pendientes = [];        // nombres que aún no han hecho su sorteo
-  let receptoresAsignados = new Set(); // quiénes ya fueron elegidos
-  let parejasConfirmadas = [];        // [{giver, receiver}, ...]
+  let asignaciones = {};
+  let pendientes = [];
+  let receptoresAsignados = new Set();
+  let parejasConfirmadas = [];
 
   let sorteoPreparado = false;
   let sorteoEnCurso = false;
-  let candidatoActual = null; // {giver, receiver}
+  let candidatoActual = null;
 
   function mezclar(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -412,7 +485,6 @@
     }
   }
 
-  // Genera una asignación sin que nadie se toque a sí mismo (derangement simple)
   function generarDerangement(nombres) {
     const n = nombres.length;
     if (n < 2) {
@@ -485,19 +557,19 @@
 
   function actualizarEstadoTexto() {
     if (pendientes.length === 0) {
-      estadoPendientes.innerHTML = '<span class="pill">Ninguno</span>';
+      estadoPendientes.innerHTML = '<span class="chip">Ninguno 🎄</span>';
     } else {
       estadoPendientes.innerHTML = pendientes
-        .map(nombre => `<span class="pill">${nombre}</span>`)
+        .map(nombre => `<span class="chip">${nombre}</span>`)
         .join('');
     }
 
     const amigosDisponibles = participantes.filter(n => !receptoresAsignados.has(n));
     if (amigosDisponibles.length === 0) {
-      estadoAmigosDisponibles.innerHTML = '<span class="pill">Ninguno</span>';
+      estadoAmigosDisponibles.innerHTML = '<span class="chip">Ninguno 🎅</span>';
     } else {
       estadoAmigosDisponibles.innerHTML = amigosDisponibles
-        .map(nombre => `<span class="pill">${nombre}</span>`)
+        .map(nombre => `<span class="chip">${nombre}</span>`)
         .join('');
     }
   }
@@ -529,8 +601,6 @@
     confirmarBtn.disabled = true;
     cancelarBtn.disabled = true;
   }
-
-  // --- Eventos UI ---
 
   agregarBtn.addEventListener('click', () => {
     const nombre = nombreInput.value.trim();
@@ -579,7 +649,7 @@
     actualizarEstadoTexto();
     actualizarTablaResultados();
 
-    alert('Sorteo preparado.\nAhora cada participante puede ingresar su nombre y descubrir a su amigo secreto.');
+    alert('Sorteo preparado 🎄\nAhora cada participante puede ingresar su nombre y descubrir a su amigo secreto.');
   });
 
   sortearBtn.addEventListener('click', () => {
@@ -612,7 +682,7 @@
     mensajeResultado.innerHTML = `
       <strong>${nombreSeleccionado}</strong>, tu amigo secreto es:
       <strong>${amigo}</strong> 🎁<br>
-      Si estás de acuerdo, haz clic en <strong>Confirmar</strong>.
+      Si estás de acuerdo, toca <strong>Confirmar</strong>.
     `;
 
     confirmarBtn.disabled = false;
@@ -638,7 +708,7 @@
     if (pendientes.length === 0) {
       mensajeResultado.classList.remove('hidden');
       mensajeResultado.classList.add('result-warning');
-      mensajeResultado.textContent = 'El sorteo ha finalizado. Todos tienen su amigo secreto.';
+      mensajeResultado.textContent = 'El sorteo ha finalizado. Todos tienen su amigo secreto 🎅✨';
     }
   });
 
@@ -673,7 +743,6 @@
     panelResultados.classList.toggle('hidden');
   });
 
-  // --- DESCARGAR PDF ---
   descargarPdfBtn.addEventListener('click', () => {
     if (parejasConfirmadas.length === 0) {
       alert('No hay parejas confirmadas para exportar.');
@@ -685,7 +754,7 @@
 
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(18);
-    doc.text('Intercambio de Regalos Familiar', 14, 18);
+    doc.text('Amigo Secreto Familiar - Navidad', 14, 18);
     doc.setFontSize(12);
     doc.text('Parejas de amigo secreto', 14, 26);
 
@@ -698,10 +767,9 @@
       styles: { fontSize: 11 }
     });
 
-    doc.save('amigo-secreto.pdf');
+    doc.save('amigo-secreto-navidad.pdf');
   });
 
-  // Inicial
   actualizarListaParticipantes();
   actualizarEstadoTexto();
   actualizarTablaResultados();
