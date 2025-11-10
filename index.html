@@ -388,7 +388,7 @@
       position: fixed;
       inset: 0;
       background: rgba(15, 23, 42, 0.85);
-      display: flex;
+      display: flex;          /* se anula con style="display:none" al inicio */
       align-items: center;
       justify-content: center;
       z-index: 50;
@@ -574,8 +574,9 @@
   </div>
 </div>
 
-<!-- Overlay de animación de sorteo -->
-<div id="overlaySorteo" class="fullscreen-overlay hidden">
+<!-- Overlay de animación de sorteo
+     IMPORTANTE: empieza oculto con style="display:none" -->
+<div id="overlaySorteo" class="fullscreen-overlay" style="display:none;">
   <div class="overlay-content">
     <p class="overlay-label">Tu amigo secreto es...</p>
     <p id="overlayNombre" class="overlay-name">---</p>
@@ -776,16 +777,16 @@
     step2Pill.classList.add('active');
   }
 
+  // Animación + mostrar overlay
   function mostrarAnimacionSorteo(amigo) {
     overlayNombre.textContent = '...';
-    overlaySorteo.classList.remove('hidden');
+    overlaySorteo.style.display = 'flex'; // MOSTRAR
 
     const nombresAnimacion = participantes.length > 0 ? participantes.slice() : [amigo];
-    let elapsed = 0;
     const duracionTotal = 2000;
     const intervalo = 80;
 
-    confirmarBtn.disabled = true; // habilitamos al final
+    confirmarBtn.disabled = true;
 
     const intervaloId = setInterval(() => {
       const randomName = nombresAnimacion[Math.floor(Math.random() * nombresAnimacion.length)];
@@ -943,6 +944,9 @@
     actualizarTablaResultados();
     actualizarEstadoTexto();
     irPaso1();
+
+    // por si acaso, esconder overlay
+    overlaySorteo.style.display = 'none';
   });
 
   toggleResultadosBtn.addEventListener('click', () => {
@@ -977,13 +981,15 @@
   });
 
   overlayCerrarBtn.addEventListener('click', () => {
-    overlaySorteo.classList.add('hidden');
+    overlaySorteo.style.display = 'none';  // OCULTAR
   });
 
   // Inicialización
   actualizarListaParticipantes();
   actualizarEstadoTexto();
   actualizarTablaResultados();
+  // seguridad extra: asegurarnos que el overlay arranca oculto
+  overlaySorteo.style.display = 'none';
 </script>
 </body>
 </html>
