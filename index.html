@@ -55,41 +55,62 @@
       margin-top: 6px;
     }
 
-    .layout {
+    /* Indicador de pasos */
+    .steps {
       display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 12px;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
     }
 
-    @media (min-width: 768px) {
-      .layout {
-        flex-direction: row;
-        align-items: flex-start;
-      }
+    .step-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      color: #6b7280;
+    }
+
+    .step-pill.active {
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      color: #f9fafb;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+    }
+
+    .step-pill span.num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .main-panel {
-      flex: 2;
-      min-width: 0;
-    }
-
-    .side-panel {
-      flex: 1;
-      min-width: 0;
+      margin-top: 14px;
     }
 
     .card {
-      background: radial-gradient(circle at top left, #fef2f2 0, #ffffff 35%, #f0fdf4 100%);
+      background: #ffffff;
       border-radius: 16px;
-      padding: 12px 12px 14px;
+      padding: 14px 12px 16px;
       margin-bottom: 12px;
-      border: 1px solid #fecaca;
-      box-shadow: 0 12px 30px rgba(185, 28, 28, 0.18);
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.12);
     }
 
     .card h2 {
-      margin: 0 0 4px;
+      margin: 0 0 8px;
       font-size: 17px;
       display: flex;
       align-items: center;
@@ -98,6 +119,12 @@
 
     .card h2 span.icon {
       font-size: 18px;
+    }
+
+    .card-description {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 10px;
     }
 
     label {
@@ -112,10 +139,10 @@
       width: 100%;
       padding: 9px 10px;
       border-radius: 12px;
-      border: 1px solid #fecaca;
+      border: 1px solid #d1d5db;
       font-size: 14px;
       margin-bottom: 6px;
-      background: #fff7ed;
+      background: #f9fafb;
       transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
 
@@ -192,13 +219,13 @@
       padding-left: 0;
       margin: 4px 0 0;
       font-size: 14px;
-      max-height: 180px;
+      max-height: 160px;
       overflow-y: auto;
     }
 
     ul.simple-list li {
       padding: 4px 2px;
-      border-bottom: 1px dashed #fecaca;
+      border-bottom: 1px dashed #e5e7eb;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -209,8 +236,26 @@
       font-size: 13px;
     }
 
-    .hidden {
-      display: none;
+    .small-note {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 3px;
+    }
+
+    .actions-row {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .estado-label {
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .estado-label strong {
+      color: #374151;
     }
 
     .result-message {
@@ -227,42 +272,6 @@
       background: #fef3c7;
       color: #92400e;
       border-color: #fed7aa;
-    }
-
-    .small-note {
-      font-size: 11px;
-      color: #6b7280;
-      margin-top: 3px;
-    }
-
-    .actions-row {
-      margin-top: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .side-panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 10px;
-      background: #fee2e2;
-      color: #b91c1c;
-      gap: 4px;
-    }
-
-    .badge span {
-      font-size: 11px;
     }
 
     table {
@@ -301,23 +310,140 @@
       background: #fffbeb;
     }
 
-    #panelResultados {
-      margin-top: 10px;
+    .hidden {
+      display: none;
+    }
+
+    .hidden-step {
+      display: none !important;
+    }
+
+    /* Panel flotante de resultados (esquina) */
+    .corner-panel {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .corner-toggle-btn {
+      font-size: 12px;
+      padding: 8px 12px;
+      min-width: auto;
+      background: linear-gradient(135deg, #0f172a, #1f2937);
+    }
+
+    .corner-card {
+      width: min(310px, 90vw);
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 10px 10px 12px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.6);
+      border: 1px solid #e5e7eb;
+    }
+
+    .corner-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .corner-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      background: #fee2e2;
+      color: #b91c1c;
+      gap: 4px;
+    }
+
+    .badge span {
+      font-size: 11px;
     }
 
     #sinResultados {
-      font-size: 12px;
+      font-size: 11px;
       color: #6b7280;
       margin-top: 6px;
     }
 
-    .estado-label {
-      font-size: 12px;
-      margin-top: 3px;
+    /* Overlay de animación de sorteo */
+    .fullscreen-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      padding: 16px;
     }
 
-    .estado-label strong {
+    .overlay-content {
+      max-width: 600px;
+      width: 100%;
+      background: radial-gradient(circle at top, #fee2e2 0, #ffffff 40%, #dcfce7 100%);
+      border-radius: 20px;
+      padding: 24px 18px 18px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      border: 1px solid #fecaca;
+    }
+
+    .overlay-label {
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #b91c1c;
+      margin-bottom: 12px;
+    }
+
+    .overlay-name {
+      font-size: clamp(32px, 7vw, 52px);
+      font-weight: 800;
+      color: #111827;
+      margin: 8px 0 16px;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      word-break: break-word;
+    }
+
+    .overlay-sub {
+      font-size: 13px;
       color: #374151;
+      margin-bottom: 14px;
+    }
+
+    .overlay-close-btn {
+      padding-inline: 22px;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 14px 10px 16px;
+      }
+      .header h1 {
+        font-size: 20px;
+      }
+      .corner-panel {
+        bottom: 10px;
+        right: 10px;
+      }
     }
   </style>
 </head>
@@ -332,109 +458,133 @@
     </p>
   </div>
 
-  <div class="layout">
-    <!-- Panel principal -->
-    <section class="main-panel">
-      <!-- 1. Participantes -->
-      <div class="card">
-        <h2><span class="icon">📝</span> 1. Participantes</h2>
-        <label for="nombreInput">Nombre del participante</label>
-        <div style="display:flex; gap:6px; align-items:flex-end;">
-          <div style="flex:1;">
-            <input type="text" id="nombreInput" placeholder="Ej: Mamá, Papá, Esteban..." />
-          </div>
-          <button id="agregarBtn">Agregar</button>
-        </div>
-        <div class="small-note">
-          No se permiten nombres repetidos. Deben haber al menos 2 participantes para iniciar el sorteo.
-        </div>
+  <div class="steps">
+    <div class="step-pill active" id="step1Pill">
+      <span class="num">1</span> Participantes
+    </div>
+    <div class="step-pill" id="step2Pill">
+      <span class="num">2</span> Sorteo
+    </div>
+  </div>
 
-        <h3 style="margin-top:10px; font-size:15px;">Lista de participantes</h3>
-        <div id="listaParticipantesVacia" style="font-size:12px;color:#6b7280;">
-          Aún no hay participantes. Empieza agregando uno 🎁
-        </div>
-        <ul id="listaParticipantes" class="simple-list"></ul>
+  <section class="main-panel">
+    <!-- Paso 1: Participantes -->
+    <div class="card" id="cardParticipantes">
+      <h2><span class="icon">📝</span> Paso 1: Agrega a los participantes</h2>
+      <p class="card-description">
+        Escribe los nombres de todos los que jugarán. Cuando estén listos, pasa al siguiente paso para preparar el sorteo.
+      </p>
 
-        <div class="actions-row">
-          <button id="iniciarSorteoBtn" disabled>2. Preparar sorteo</button>
-          <button id="reiniciarBtn" class="btn-secondary btn-danger">Reiniciar todo</button>
+      <label for="nombreInput">Nombre del participante</label>
+      <div style="display:flex; gap:6px; align-items:flex-end;">
+        <div style="flex:1;">
+          <input type="text" id="nombreInput" placeholder="Ej: Mamá, Papá, Esteban..." />
         </div>
+        <button id="agregarBtn">Agregar</button>
+      </div>
+      <div class="small-note">
+        No se permiten nombres repetidos. Deben haber al menos 2 participantes para iniciar el sorteo.
       </div>
 
-      <!-- 2. Sorteo individual -->
-      <div class="card" id="panelSorteo" style="display:none;">
-        <h2><span class="icon">🎁</span> 3. Sorteo de amigo secreto</h2>
-        <div class="small-note">
-          Cada persona selecciona su nombre y toca <strong>“Sortear”</strong> para ver a quién le toca.
+      <h3 style="margin-top:10px; font-size:15px;">Lista de participantes</h3>
+      <div id="listaParticipantesVacia" style="font-size:12px;color:#6b7280;">
+        Aún no hay participantes. Empieza agregando uno 🎁
+      </div>
+      <ul id="listaParticipantes" class="simple-list"></ul>
+
+      <div class="actions-row">
+        <button id="iniciarSorteoBtn" disabled>Ir al Paso 2: Preparar sorteo</button>
+        <button id="reiniciarBtn" class="btn-secondary btn-danger">Reiniciar todo</button>
+      </div>
+    </div>
+
+    <!-- Paso 2: Sorteo individual -->
+    <div class="card hidden-step" id="cardSorteo">
+      <h2><span class="icon">🎁</span> Paso 2: Sorteo de amigo secreto</h2>
+      <p class="card-description">
+        Cada persona selecciona su nombre y toca <strong>“Sortear”</strong>. Verá en grande el nombre de su amigo secreto.
+      </p>
+
+      <label for="selectParticipante">Selecciona tu nombre</label>
+      <select id="selectParticipante">
+        <!-- dinámico -->
+      </select>
+
+      <div class="actions-row">
+        <button id="sortearBtn">Sortear</button>
+        <button id="confirmarBtn" disabled class="btn-accent">Confirmar</button>
+        <button id="cancelarBtn" disabled class="btn-secondary">Cancelar</button>
+        <button id="volverPaso1Btn" class="btn-secondary" style="margin-left:auto;">← Volver a participantes</button>
+      </div>
+
+      <div id="mensajeResultado" class="result-message hidden"></div>
+
+      <div style="margin-top:10px;">
+        <h3 style="font-size:14px;">Estado actual</h3>
+        <div class="estado-label">
+          <strong>Participantes pendientes:</strong>
+          <span id="estadoPendientes"></span>
         </div>
-
-        <label for="selectParticipante">Selecciona tu nombre</label>
-        <select id="selectParticipante">
-          <!-- dinámico -->
-        </select>
-
-        <div class="actions-row">
-          <button id="sortearBtn">Sortear</button>
-          <button id="confirmarBtn" disabled class="btn-accent">Confirmar</button>
-          <button id="cancelarBtn" disabled class="btn-secondary">Cancelar</button>
-        </div>
-
-        <div id="mensajeResultado" class="result-message hidden"></div>
-
-        <div style="margin-top:10px;">
-          <h3 style="font-size:14px;">Estado actual</h3>
-          <div class="estado-label">
-            <strong>Participantes pendientes:</strong>
-            <span id="estadoPendientes"></span>
-          </div>
-          <div class="estado-label">
-            <strong>Amigos secretos disponibles:</strong>
-            <span id="estadoAmigosDisponibles"></span>
-          </div>
+        <div class="estado-label">
+          <strong>Amigos secretos disponibles:</strong>
+          <span id="estadoAmigosDisponibles"></span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+</div>
 
-    <!-- Panel lateral -->
-    <section class="side-panel">
-      <div class="card">
-        <div class="side-panel-header">
-          <h2 style="font-size:16px; margin:0; display:flex; align-items:center; gap:4px;">
-            <span>🔐</span> Resultados
-          </h2>
-          <button id="toggleResultadosBtn" class="btn-secondary" style="font-size:11px; padding:5px 10px;">
-            Mostrar / Ocultar
-          </button>
-        </div>
-        <div class="badge">
-          <span>🎄 Panel oculto al inicio</span>
-        </div>
+<!-- Panel flotante de resultados en esquina -->
+<div class="corner-panel">
+  <button id="toggleResultadosBtn" class="corner-toggle-btn">
+    📄 Ver parejas
+  </button>
 
-        <div id="panelResultados" class="hidden">
-          <div class="actions-row" style="margin-top:8px;">
-            <button id="descargarPdfBtn" class="btn-accent" style="font-size:12px;">
-              📄 Descargar PDF
-            </button>
-          </div>
-
-          <h3 style="margin:6px 0 2px; font-size:14px;">Parejas de amigo secreto</h3>
-          <table>
-            <thead>
-            <tr>
-              <th>Participante</th>
-              <th>Amigo secreto</th>
-            </tr>
-            </thead>
-            <tbody id="tablaResultadosBody">
-            <!-- filas dinámicas -->
-            </tbody>
-          </table>
-          <div id="sinResultados">
-            Aún no se ha confirmado ninguna pareja. Cuando confirmen, aparecerán aquí 🎅
-          </div>
-        </div>
+  <div id="panelResultados" class="corner-card hidden">
+    <div class="corner-card-header">
+      <div class="corner-card-title">
+        <span>🔐</span> Resultados del sorteo
       </div>
-    </section>
+      <div class="badge">
+        <span>Solo organizador</span>
+      </div>
+    </div>
+
+    <div class="actions-row" style="margin-top:4px;">
+      <button id="descargarPdfBtn" class="btn-accent" style="font-size:12px; padding:6px 10px; min-width:auto;">
+        📄 PDF
+      </button>
+    </div>
+
+    <h3 style="margin:6px 0 2px; font-size:13px;">Parejas de amigo secreto</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>Participante</th>
+        <th>Amigo secreto</th>
+      </tr>
+      </thead>
+      <tbody id="tablaResultadosBody">
+      <!-- filas dinámicas -->
+      </tbody>
+    </table>
+    <div id="sinResultados">
+      Aún no se ha confirmado ninguna pareja. Cuando confirmen, aparecerán aquí 🎅
+    </div>
+  </div>
+</div>
+
+<!-- Overlay de animación de sorteo -->
+<div id="overlaySorteo" class="fullscreen-overlay hidden">
+  <div class="overlay-content">
+    <p class="overlay-label">Tu amigo secreto es...</p>
+    <p id="overlayNombre" class="overlay-name">---</p>
+    <p class="overlay-sub">
+      Recuerda no decirlo en voz alta si hay alguien mirando la pantalla 👀
+    </p>
+    <button id="overlayCerrarBtn" class="overlay-close-btn">
+      Listo
+    </button>
   </div>
 </div>
 
@@ -451,12 +601,18 @@
   const listaParticipantesEl = document.getElementById('listaParticipantes');
   const listaParticipantesVaciaEl = document.getElementById('listaParticipantesVacia');
 
-  const panelSorteo = document.getElementById('panelSorteo');
+  const cardParticipantes = document.getElementById('cardParticipantes');
+  const cardSorteo = document.getElementById('cardSorteo');
+
+  const step1Pill = document.getElementById('step1Pill');
+  const step2Pill = document.getElementById('step2Pill');
+
   const selectParticipante = document.getElementById('selectParticipante');
   const sortearBtn = document.getElementById('sortearBtn');
   const confirmarBtn = document.getElementById('confirmarBtn');
   const cancelarBtn = document.getElementById('cancelarBtn');
   const mensajeResultado = document.getElementById('mensajeResultado');
+  const volverPaso1Btn = document.getElementById('volverPaso1Btn');
 
   const estadoPendientes = document.getElementById('estadoPendientes');
   const estadoAmigosDisponibles = document.getElementById('estadoAmigosDisponibles');
@@ -467,6 +623,10 @@
   const sinResultados = document.getElementById('sinResultados');
 
   const descargarPdfBtn = document.getElementById('descargarPdfBtn');
+
+  const overlaySorteo = document.getElementById('overlaySorteo');
+  const overlayNombre = document.getElementById('overlayNombre');
+  const overlayCerrarBtn = document.getElementById('overlayCerrarBtn');
 
   let participantes = [];
   let asignaciones = {};
@@ -602,6 +762,45 @@
     cancelarBtn.disabled = true;
   }
 
+  function irPaso1() {
+    cardParticipantes.classList.remove('hidden-step');
+    cardSorteo.classList.add('hidden-step');
+    step1Pill.classList.add('active');
+    step2Pill.classList.remove('active');
+  }
+
+  function irPaso2() {
+    cardParticipantes.classList.add('hidden-step');
+    cardSorteo.classList.remove('hidden-step');
+    step1Pill.classList.remove('active');
+    step2Pill.classList.add('active');
+  }
+
+  function mostrarAnimacionSorteo(amigo) {
+    overlayNombre.textContent = '...';
+    overlaySorteo.classList.remove('hidden');
+
+    const nombresAnimacion = participantes.length > 0 ? participantes.slice() : [amigo];
+    let elapsed = 0;
+    const duracionTotal = 2000;
+    const intervalo = 80;
+
+    confirmarBtn.disabled = true; // habilitamos al final
+
+    const intervaloId = setInterval(() => {
+      const randomName = nombresAnimacion[Math.floor(Math.random() * nombresAnimacion.length)];
+      overlayNombre.textContent = randomName;
+    }, intervalo);
+
+    setTimeout(() => {
+      clearInterval(intervaloId);
+      overlayNombre.textContent = amigo;
+      confirmarBtn.disabled = false;
+    }, duracionTotal);
+  }
+
+  // Eventos
+
   agregarBtn.addEventListener('click', () => {
     const nombre = nombreInput.value.trim();
     if (!nombre) return;
@@ -643,11 +842,12 @@
     parejasConfirmadas = [];
     sorteoPreparado = true;
 
-    panelSorteo.style.display = 'block';
     limpiarResultadoActual();
     actualizarSelectPendientes();
     actualizarEstadoTexto();
     actualizarTablaResultados();
+
+    irPaso2();
 
     alert('Sorteo preparado 🎄\nAhora cada participante puede ingresar su nombre y descubrir a su amigo secreto.');
   });
@@ -685,8 +885,10 @@
       Si estás de acuerdo, toca <strong>Confirmar</strong>.
     `;
 
-    confirmarBtn.disabled = false;
     cancelarBtn.disabled = false;
+
+    // Animación en pantalla completa
+    mostrarAnimacionSorteo(amigo);
   });
 
   confirmarBtn.addEventListener('click', () => {
@@ -717,6 +919,10 @@
     sorteoEnCurso = false;
   });
 
+  volverPaso1Btn.addEventListener('click', () => {
+    irPaso1();
+  });
+
   reiniciarBtn.addEventListener('click', () => {
     if (!confirm('¿Seguro que quieres reiniciar todo el sorteo?')) return;
 
@@ -729,7 +935,6 @@
     sorteoEnCurso = false;
     candidatoActual = null;
 
-    panelSorteo.style.display = 'none';
     selectParticipante.innerHTML = '';
     mensajeResultado.classList.add('hidden');
     mensajeResultado.textContent = '';
@@ -737,6 +942,7 @@
     actualizarListaParticipantes();
     actualizarTablaResultados();
     actualizarEstadoTexto();
+    irPaso1();
   });
 
   toggleResultadosBtn.addEventListener('click', () => {
@@ -770,6 +976,11 @@
     doc.save('amigo-secreto-navidad.pdf');
   });
 
+  overlayCerrarBtn.addEventListener('click', () => {
+    overlaySorteo.classList.add('hidden');
+  });
+
+  // Inicialización
   actualizarListaParticipantes();
   actualizarEstadoTexto();
   actualizarTablaResultados();
